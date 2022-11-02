@@ -90,11 +90,32 @@ window.addEventListener('resize', windowSize);
 
 
 //Task 7
-На сторінці потрібно реалізувати 2 випадаючих списки. У першому містяться назви країн,
- у другому – назви міст. Реалізувати роботу таким чином, щоб коли вибирається з лівого
- випадаючого списку певна країна - в правому випадаючому  списку з'являлися міста цієї
-країни. Список міст формується динамічно, через JavaScript. Також потрібно нижче вивести
- назву обраної країни і місто.
 */
+const cities = {
+  'ger': ['Berlin', 'Munich', 'Keln', 'Hamburg'],
+  'usa': ['Texas', 'Ohio', 'Oklahoma', 'Oregon'],
+  'ukr': ['Kyiv', 'Dnipro', 'Simferopol', 'Donetsk'],
+}
 
-// in progress
+let countrydropdown = document.getElementById("country");
+countrydropdown.addEventListener('change', citieslist);
+countrydropdown.addEventListener('change', showcity);
+
+let citydropdrown = document.getElementById("cities");
+citydropdrown.addEventListener('change', showcity);
+
+function citieslist() {
+  citydropdrown.innerHTML = "";
+  let country_select = countrydropdown.value;
+  for (let i = 0; i < cities[country_select].length; i++) {
+    let new_option = document.createElement('option');
+    new_option.innerHTML = cities[country_select][i];
+    citydropdrown.appendChild(new_option);
+  }
+}
+
+let paragraph = document.querySelector('p');
+function showcity() {
+  paragraph.innerHTML = '';
+  paragraph.innerHTML = countrydropdown.options[countrydropdown.value] + " " + citydropdrown.options[showcity.value];
+}
